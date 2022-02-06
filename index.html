@@ -8,7 +8,33 @@
     <title>Expense Tracker App</title>
   </head>
   <body>
-    <main></main>
+    <main>
+      <h1>Expense Tracker App</h1>
+      <form action="" class="expense-input">
+        <label for="">Date:</label>
+        <input type="date" class="input-box" required />
+        <label for="">Amount:</label>
+        <input type="number" class="input-box" required />
+        <label for="">Payee:</label>
+        <input type="text" class="input-box" required />
+        <label for="">Type</label>
+        <select name="payment-type" class="payment-type" required>
+          <option value="none" class="options-list">💸 select payment</option>
+          <option value="credit-card" class="options-list">
+            Credit Card 💳
+          </option>
+          <option value="debit-card" class="options-list">Debit Card 💳</option>
+          <option value="cash" class="options-list">Cash 💵</option>
+          <option value="paypal" class="options-list">Paypal⚡</option>
+          <option value="other-payment" class="options-list">Other 💰</option>
+        </select>
+        <button type="submit" id="add-expense">💲 Add Expense</button>
+        <button type="reset" id="'clear-input">🧹 Clear Form</button>
+      </form>
+      <div id="expense-list">
+        <!-- add table -->
+      </div>
+    </main>
     <script src="app.js"></script>
   </body>
 </html>
