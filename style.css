@@ -1,14 +1,36 @@
 body {
   font-family: sans-serif;
   font-weight: 400;
-  height: 100vh;
+  height: 50vh;
   color: rgb(255, 255, 255);
-  background-image: linear-gradient(to top left, #36825f 0%, #68bf2e 100%);
+  background-color: #4b9619;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+form {
+  margin: 50px;
+}
+
 table {
   border: 2px, solid black;
+  max-width: 500px;
+}
+
+.table-header {
+  max-width: 500px;
+  padding: 10px;
+  margin-left: auto;
+}
+
+.expense-table {
+  border: 2px, solid black;
+}
+
+.expense-list {
+  display: flex;
+  max-width: 500px;
+  align-items: center;
+  justify-content: center;
 }
