@@ -71,8 +71,9 @@ function deleteExpense(e) {
     if (expenseEntries !== null && targetForDelete !== entry.entryId) {
       newArr.push(expenseEntries[i]);
     }
-    expenseEntries = newArr;
 
-    e.target.parentElement.parentElement.remove();
+    // e.target.parentElement.parentElement.remove();
   }
+  expenseEntries = newArr;
+  displayExpenses(expenseEntries);
 }
