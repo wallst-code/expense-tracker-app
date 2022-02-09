@@ -5,12 +5,13 @@ const amount = document.querySelector('.amount-input');
 const payee = document.querySelector('.payee-input');
 const paymentType = document.querySelector('.payment-type');
 const btnAddExpense = document.getElementById('add-expense');
-const btnDelete = document.getElementById('delete');
 const expenseRows = document.querySelector('.expenses');
 
 let expenseEntries = [];
+displayExpenses(expenseEntries);
 
 btnAddExpense.addEventListener('click', addExpenses);
+expenseRows.addEventListener('click', deleteExpense);
 
 function addExpenses(e) {
   e.preventDefault();
@@ -20,6 +21,7 @@ function addExpenses(e) {
     amount: amount.value,
     payee: payee.value,
     paymentType: paymentType.value,
+    entryId: expenseEntries.length + 1,
   };
 
   expenseEntries.push(expenseData);
@@ -27,51 +29,50 @@ function addExpenses(e) {
   displayExpenses(expenseEntries);
 }
 
-function createDisplayElements() {
-  const addExpenseRow = document.createElement('tr');
-  const dateEl = document.createElement('td');
-  const amountEl = document.createElement('td');
-  const payeeEl = document.createElement('td');
-  const paymentTypeEl = document.createElement('td');
-}
-
-function displayExpenses1() {
+function displayExpenses(expenseEntries) {
+  expenseRows.textContent = '';
   for (const entry of expenseEntries) {
-    console.log(entry);
+    const addExpenseRow = document.createElement('tr');
+    const dateEl = document.createElement('td');
+    const amountEl = document.createElement('td');
+    const payeeEl = document.createElement('td');
+    const paymentTypeEl = document.createElement('td');
+    const deleteBtnContianer = document.createElement('td');
+    const btnDelete = document.createElement('button');
+
+    expenseRows.appendChild(addExpenseRow);
+    addExpenseRow.appendChild(dateEl);
+    addExpenseRow.appendChild(amountEl);
+    addExpenseRow.appendChild(payeeEl);
+    addExpenseRow.appendChild(paymentTypeEl);
+    addExpenseRow.appendChild(deleteBtnContianer);
+    deleteBtnContianer.appendChild(btnDelete);
+
+    dateEl.textContent = `${entry.date}`;
+    amountEl.textContent = `$${entry.amount}`;
+    payeeEl.textContent = `${entry.payee}`;
+    paymentTypeEl.textContent = `${entry.paymentType}`;
+
+    btnDelete.setAttribute('entry-id', `${entry.entryId}`);
+
+    btnDelete.setAttribute('id', 'delete');
+    btnDelete.textContent = 'X';
   }
 }
-displayExpenses1();
 
-const displayExpenses = expenseEntries => {
-  expenseRows.innerHTML = ' ';
-  for (const entry of expenseEntries.entries()) {
-    const newHTMLRow = `
-    <td class='new-data'>${entry.date}</td>
-    <td class='new-data'>$${entry.amount}</td>
-    <td class='new-data'>${entry.payee}</td>
-    <td class='new-data'>${entry.paymentType}</td>
-    <td class='new-data'> <button type="submit" id="delete">X</button> </td>
-    `;
-
-    const addExpenseRow = document.createElement('tr');
-    addExpenseRow.setAttribute('class', 'new-expense-row');
-
-    addExpenseRow.innerHTML = newHTMLRow;
-    expenseRows.appendChild(addExpenseRow);
-    // btnDelete.addEventListener('click', function (e) {
-    //   e.preventDefault();
-    //   console.log('test delete');
-    // });
-  }
-};
-
-expenseRows.addEventListener('click', function (e) {
+function deleteExpense(e) {
   e.preventDefault();
-  console.log('target', e.target);
-  console.log('tracking elements ', e.target.parentElement.parentElement);
-  console.log('\ncurrentTarget', e.currentTarget);
-  e.target.parentElement.parentElement.remove();
 
-  //I need to grab a parent element or find a way to delete somehting by id.
-  //target gives me the button id and currenttarget() gives me the row id.
-});
+  const targetForDelete = Number(e.target.getAttribute('entry-id'));
+
+  let newArr = [];
+
+  for (const [i, entry] of expenseEntries.entries()) {
+    if (expenseEntries !== null && targetForDelete !== entry.entryId) {
+      newArr.push(expenseEntries[i]);
+    }
+    expenseEntries = newArr;
+
+    e.target.parentElement.parentElement.remove();
+  }
+}
