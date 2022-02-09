@@ -6,7 +6,7 @@ const payee = document.querySelector('.payee-input');
 const paymentType = document.querySelector('.payment-type');
 const btnAddExpense = document.getElementById('add-expense');
 const btnDelete = document.getElementById('delete');
-const newExpenseRow = document.querySelector('.expenses');
+const expenseRows = document.querySelector('.expenses');
 
 let expenseEntries = [];
 
@@ -26,8 +26,8 @@ btnAddExpense.addEventListener('click', function (e) {
 });
 
 const displayExpenses = expenseEntries => {
-  newExpenseRow.innerHTML = ' ';
-  for (const entry of expenseEntries) {
+  expenseRows.innerHTML = ' ';
+  for (const [i, entry] of expenseEntries.entries()) {
     const newHTMLRow = `
     <td class='new-data'>${entry.date}</td>
     <td class='new-data'>$${entry.amount}</td>
@@ -38,12 +38,23 @@ const displayExpenses = expenseEntries => {
 
     const addExpenseRow = document.createElement('tr');
     addExpenseRow.setAttribute('class', 'new-expense-row');
+    addExpenseRow.setAttribute('id', `${i}`);
     addExpenseRow.innerHTML = newHTMLRow;
-    newExpenseRow.appendChild(addExpenseRow);
+    expenseRows.appendChild(addExpenseRow);
+    // btnDelete.addEventListener('click', function (e) {
+    //   e.preventDefault();
+    //   console.log('test delete');
+    // });
   }
 };
 
-btnDelete.addEventListener('click', function (e) {
+expenseRows.addEventListener('click', function (e) {
   e.preventDefault();
-  console.log('test delete');
+  console.log('target', e.target);
+  console.log('\ncurrentTarget', e.currentTarget);
+  console.log(e.currentTarget.classList);
+  console.log(expenseRows.childNodes);
+
+  // e.currentTarget.remove();
+  //I need to grab a parent element or find a way to delete somehting by id.
 });
