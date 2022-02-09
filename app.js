@@ -10,7 +10,9 @@ const expenseRows = document.querySelector('.expenses');
 
 let expenseEntries = [];
 
-btnAddExpense.addEventListener('click', function (e) {
+btnAddExpense.addEventListener('click', addExpenses);
+
+function addExpenses(e) {
   e.preventDefault();
 
   const expenseData = {
@@ -23,22 +25,37 @@ btnAddExpense.addEventListener('click', function (e) {
   expenseEntries.push(expenseData);
   date.value = amount.value = payee.value = paymentType.value = '';
   displayExpenses(expenseEntries);
-});
+}
+
+function createDisplayElements() {
+  const addExpenseRow = document.createElement('tr');
+  const dateEl = document.createElement('td');
+  const amountEl = document.createElement('td');
+  const payeeEl = document.createElement('td');
+  const paymentTypeEl = document.createElement('td');
+}
+
+function displayExpenses1() {
+  for (const entry of expenseEntries) {
+    console.log(entry);
+  }
+}
+displayExpenses1();
 
 const displayExpenses = expenseEntries => {
   expenseRows.innerHTML = ' ';
-  for (const [i, entry] of expenseEntries.entries()) {
+  for (const entry of expenseEntries.entries()) {
     const newHTMLRow = `
     <td class='new-data'>${entry.date}</td>
     <td class='new-data'>$${entry.amount}</td>
     <td class='new-data'>${entry.payee}</td>
     <td class='new-data'>${entry.paymentType}</td>
-    <td class='new-data'> <button type="submit" id="delete" button-id=${i}>X</button> </td>
+    <td class='new-data'> <button type="submit" id="delete">X</button> </td>
     `;
 
     const addExpenseRow = document.createElement('tr');
     addExpenseRow.setAttribute('class', 'new-expense-row');
-    addExpenseRow.setAttribute('row-id', `${i}`);
+
     addExpenseRow.innerHTML = newHTMLRow;
     expenseRows.appendChild(addExpenseRow);
     // btnDelete.addEventListener('click', function (e) {
@@ -51,7 +68,9 @@ const displayExpenses = expenseEntries => {
 expenseRows.addEventListener('click', function (e) {
   e.preventDefault();
   console.log('target', e.target);
+  console.log('tracking elements ', e.target.parentElement.parentElement);
   console.log('\ncurrentTarget', e.currentTarget);
+  e.target.parentElement.parentElement.remove();
 
   //I need to grab a parent element or find a way to delete somehting by id.
   //target gives me the button id and currenttarget() gives me the row id.
