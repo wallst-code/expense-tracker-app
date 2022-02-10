@@ -27,7 +27,12 @@ function addExpenses(e) {
   };
 
   expenseEntries.push(expenseData);
-  date.value = amount.value = payee.value = paymentType.value = '';
+  date.value =
+    amount.value =
+    payee.value =
+    description.value =
+    paymentType.value =
+      '';
   displayExpenses(expenseEntries);
 }
 
@@ -39,7 +44,7 @@ function displayExpenses(expenseEntries) {
     const amountEl = document.createElement('td');
     const payeeEl = document.createElement('td');
     const paymentTypeEl = document.createElement('td');
-    const deleteBtnContianer = document.createElement('td');
+    const deleteBtnContainer = document.createElement('td');
     const descriptionEl = document.createElement('td');
     const btnDelete = document.createElement('button');
     expenseRows.appendChild(addExpenseRow);
@@ -48,8 +53,8 @@ function displayExpenses(expenseEntries) {
     addExpenseRow.appendChild(payeeEl);
     addExpenseRow.appendChild(descriptionEl);
     addExpenseRow.appendChild(paymentTypeEl);
-    addExpenseRow.appendChild(deleteBtnContianer);
-    deleteBtnContianer.appendChild(btnDelete);
+    addExpenseRow.appendChild(deleteBtnContainer);
+    deleteBtnContainer.appendChild(btnDelete);
 
     dateEl.textContent = `${entry.date}`;
     amountEl.textContent = `$${entry.amount}`;
