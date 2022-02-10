@@ -6,6 +6,7 @@ const payee = document.querySelector('.payee-input');
 const paymentType = document.querySelector('.payment-type');
 const btnAddExpense = document.getElementById('add-expense');
 const expenseRows = document.querySelector('.expenses');
+const description = document.querySelector('.description-input');
 
 let expenseEntries = [];
 displayExpenses(expenseEntries);
@@ -22,6 +23,7 @@ function addExpenses(e) {
     payee: payee.value,
     paymentType: paymentType.value,
     entryId: expenseEntries.length + 1,
+    description: description.value,
   };
 
   expenseEntries.push(expenseData);
@@ -38,11 +40,13 @@ function displayExpenses(expenseEntries) {
     const payeeEl = document.createElement('td');
     const paymentTypeEl = document.createElement('td');
     const deleteBtnContianer = document.createElement('td');
+    const descriptionEl = document.createElement('td');
     const btnDelete = document.createElement('button');
     expenseRows.appendChild(addExpenseRow);
     addExpenseRow.appendChild(dateEl);
     addExpenseRow.appendChild(amountEl);
     addExpenseRow.appendChild(payeeEl);
+    addExpenseRow.appendChild(descriptionEl);
     addExpenseRow.appendChild(paymentTypeEl);
     addExpenseRow.appendChild(deleteBtnContianer);
     deleteBtnContianer.appendChild(btnDelete);
@@ -50,6 +54,7 @@ function displayExpenses(expenseEntries) {
     dateEl.textContent = `${entry.date}`;
     amountEl.textContent = `$${entry.amount}`;
     payeeEl.textContent = `${entry.payee}`;
+    descriptionEl.textContent = `${entry.description}`;
     paymentTypeEl.textContent = `${entry.paymentType}`;
 
     btnDelete.setAttribute('entry-id', `${entry.entryId}`);
