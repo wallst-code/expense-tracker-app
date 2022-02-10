@@ -2,8 +2,10 @@
 <p>An expense tracking app built using HTML, CSS and JavaScript.<p> 
 <hr>
 
-<p>Check it out here: <a href=>Expense Tracker App</a><p>
+<p>Check it out here: <a href='https://wallst-code.github.io/expense-tracker-app'/>Expense Tracker App</a><p>
 <img width="545" alt="" src="">
+ <img width="901" alt="image" src="https://user-images.githubusercontent.com/69335472/153314205-4db7593d-2896-4c0e-95bc-1ec41a8f6acd.png">
+
  <hr>
 
 <h3>SUMMARY</h3> 
