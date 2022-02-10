@@ -19,3 +19,4 @@
   <li>Senit Lutgen - Full Stack Software Developer - <a href="https://www.linkedin.com/in/senit-lutgen-j-d-mba-442304227/">Senit's LinkedIn</a></li>
   
 </ul>
+<img width="901" alt="image" src="https://user-images.githubusercontent.com/69335472/153314205-4db7593d-2896-4c0e-95bc-1ec41a8f6acd.png">
