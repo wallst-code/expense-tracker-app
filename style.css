@@ -10,37 +10,53 @@ body {
 }
 
 form {
-  margin: 50px;
+  margin-bottom: 50px;
 }
 
-table {
-  border: 2px solid black;
-  max-width: 500px;
+label {
+  margin: 0px, 5px;
+  padding: 10px;
+  font-weight: bold;
+}
+
+#add-expense,
+#clear-input {
+  padding: 5px;
+  margin: 10px;
+}
+
+table,
+th,
+td {
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  border-collapse: collapse;
 }
 
 .table-header {
-  max-width: 500px;
-  padding: 10px, 50px;
-  margin-left: auto;
+  margin: auto;
 }
 
 .expense-table {
+  border: 2px solid black;
 }
 
-.expense-list {
+th {
+  min-width: 125px;
   display: flex;
-  max-width: 500px;
-  align-items: center;
-  justify-content: center;
 }
 
-.new-expense-row {
+tr {
+  display: flex;
 }
 
-.new-data {
+td {
+  padding: 10px;
+  width: 125px;
 }
 
-#delete {
+.delete {
   border-radius: 50%;
   color: red;
   background-color: white;

@@ -39,7 +39,6 @@ function displayExpenses(expenseEntries) {
     const paymentTypeEl = document.createElement('td');
     const deleteBtnContianer = document.createElement('td');
     const btnDelete = document.createElement('button');
-
     expenseRows.appendChild(addExpenseRow);
     addExpenseRow.appendChild(dateEl);
     addExpenseRow.appendChild(amountEl);
@@ -55,7 +54,7 @@ function displayExpenses(expenseEntries) {
 
     btnDelete.setAttribute('entry-id', `${entry.entryId}`);
 
-    btnDelete.setAttribute('id', 'delete');
+    btnDelete.setAttribute('class', 'delete');
     btnDelete.textContent = 'X';
   }
 }
