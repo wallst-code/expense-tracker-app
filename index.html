@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css" />
     <title>Expense Tracker App</title>
   </head>
+
   <body>
     <main>
       <h1>Expense Tracker App</h1>
@@ -50,15 +51,17 @@
       </form>
       <div id="expense-list">
         <table class="expense-table">
-          <tr id="table-headers">
-            <th class="table-header">Date</th>
-            <th class="table-header">Expense Amount</th>
-            <th class="table-header">Payee</th>
-            <th class="'table-header">Description:</th>
-            <th class="table-header">Payment Type</th>
-            <th class="table-header">Delete</th>
-          </tr>
-          <tr class="expenses"></tr>
+          <thead>
+            <tr id="table-headers">
+              <th class="table-header">Date</th>
+              <th class="table-header">Expense Amount</th>
+              <th class="table-header">Payee</th>
+              <th class="'table-header">Description:</th>
+              <th class="table-header">Payment Type</th>
+              <th class="table-header">Delete</th>
+            </tr>
+          </thead>
+          <tbody class="expenses"></tbody>
         </table>
       </div>
     </main>

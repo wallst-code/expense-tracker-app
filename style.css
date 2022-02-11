@@ -1,3 +1,4 @@
+/* TODO refactor from flex to grid */
 body {
   font-family: sans-serif;
   font-weight: 400;
@@ -35,11 +36,8 @@ td {
   text-align: left;
 }
 
-.table-header {
-  /* margin: 25px, 0px; */
-}
-
-th {
+table {
+  flex-direction: column;
 }
 
 .expense-table {
@@ -63,7 +61,7 @@ td {
   width: 125px;
 }
 
-.delete {
+tbody tr button {
   border-radius: 50%;
   color: red;
   background-color: white;

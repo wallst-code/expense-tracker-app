@@ -1,88 +1,73 @@
 'use strict';
+//TODO delete from local storage functionality
+loadAllExpenses();
 
-const date = document.querySelector('.date-input');
-const amount = document.querySelector('.amount-input');
-const payee = document.querySelector('.payee-input');
-const paymentType = document.querySelector('.payment-type');
-const btnAddExpense = document.getElementById('add-expense');
-const expenseRows = document.querySelector('.expenses');
-const description = document.querySelector('.description-input');
+document.getElementById('add-expense').addEventListener('click', e => {
+  e.preventDefault(e);
+  const expenseObject = getFormData();
+  createNewExpense(expenseObject);
+  setNewExpenseToLocalStorage(expenseObject);
+  resetForm();
+});
 
-let expenseEntries = [];
-displayExpenses(expenseEntries);
+function createNewExpense(expenseObject) {
+  const newExpenseRow = document.createElement('tr');
+  const dateEl = document.createElement('td');
+  const amountEl = document.createElement('td');
+  const payeeEl = document.createElement('td');
+  const paymentTypeEl = document.createElement('td');
+  const btnDeleteContainter = document.createElement('td');
+  const descriptionEl = document.createElement('td');
+  const btnDelete = document.createElement('button');
 
-btnAddExpense.addEventListener('click', addExpenses);
-expenseRows.addEventListener('click', deleteExpense);
+  dateEl.textContent = `${expenseObject.date}`;
+  amountEl.textContent = `$${expenseObject.amount}`;
+  payeeEl.textContent = `${expenseObject.payee}`;
+  descriptionEl.textContent = `${expenseObject.description}`;
+  paymentTypeEl.textContent = `${expenseObject.paymentType}`;
 
-function addExpenses(e) {
-  e.preventDefault();
+  newExpenseRow.appendChild(dateEl);
+  newExpenseRow.appendChild(amountEl);
+  newExpenseRow.appendChild(payeeEl);
+  newExpenseRow.appendChild(descriptionEl);
+  newExpenseRow.appendChild(paymentTypeEl);
 
-  const expenseData = {
-    date: date.value,
-    amount: amount.value,
-    payee: payee.value,
-    paymentType: paymentType.value,
-    entryId: expenseEntries.length + 1,
-    description: description.value,
+  btnDelete.textContent = 'X';
+  btnDelete.onclick = e => e.target.parentElement.parentElement.remove();
+
+  btnDeleteContainter.appendChild(btnDelete);
+  newExpenseRow.appendChild(btnDeleteContainter);
+
+  document.querySelector('.expenses').appendChild(newExpenseRow);
+}
+
+function resetForm() {
+  document.querySelector('.expense-input').reset();
+}
+
+function getFormData() {
+  return {
+    date: document.querySelector('.date-input').value,
+    amount: document.querySelector('.amount-input').value,
+    payee: document.querySelector('.payee-input').value,
+    paymentType: document.querySelector('.payment-type').value,
+    description: document.querySelector('.description-input').value,
   };
-
-  expenseEntries.push(expenseData);
-  date.value =
-    amount.value =
-    payee.value =
-    description.value =
-    paymentType.value =
-      '';
-  displayExpenses(expenseEntries);
 }
 
-function displayExpenses(expenseEntries) {
-  expenseRows.textContent = '';
-  for (const entry of expenseEntries) {
-    const addExpenseRow = document.createElement('tr');
-    const dateEl = document.createElement('td');
-    const amountEl = document.createElement('td');
-    const payeeEl = document.createElement('td');
-    const paymentTypeEl = document.createElement('td');
-    const deleteBtnContainer = document.createElement('td');
-    const descriptionEl = document.createElement('td');
-    const btnDelete = document.createElement('button');
-    expenseRows.appendChild(addExpenseRow);
-    addExpenseRow.appendChild(dateEl);
-    addExpenseRow.appendChild(amountEl);
-    addExpenseRow.appendChild(payeeEl);
-    addExpenseRow.appendChild(descriptionEl);
-    addExpenseRow.appendChild(paymentTypeEl);
-    addExpenseRow.appendChild(deleteBtnContainer);
-    deleteBtnContainer.appendChild(btnDelete);
-
-    dateEl.textContent = `${entry.date}`;
-    amountEl.textContent = `$${entry.amount}`;
-    payeeEl.textContent = `${entry.payee}`;
-    descriptionEl.textContent = `${entry.description}`;
-    paymentTypeEl.textContent = `${entry.paymentType}`;
-
-    btnDelete.setAttribute('entry-id', `${entry.entryId}`);
-
-    btnDelete.setAttribute('class', 'delete');
-    btnDelete.textContent = 'X';
-  }
+function setNewExpenseToLocalStorage(newExpense) {
+  const expenseArray = getExpensesFromLocalStorage();
+  expenseArray.push(newExpense);
+  localStorage.setItem('expenses', JSON.stringify(expenseArray));
 }
 
-function deleteExpense(e) {
-  e.preventDefault();
+function getExpensesFromLocalStorage() {
+  return JSON.parse(localStorage.getItem('expenses')) || [];
+}
 
-  const targetForDelete = Number(e.target.getAttribute('entry-id'));
-
-  let newArr = [];
-
-  for (const [i, entry] of expenseEntries.entries()) {
-    if (expenseEntries !== null && targetForDelete !== entry.entryId) {
-      newArr.push(expenseEntries[i]);
-    }
-
-    // e.target.parentElement.parentElement.remove();
+function loadAllExpenses() {
+  const expenseArray = getExpensesFromLocalStorage();
+  for (const expense of expenseArray) {
+    createNewExpense(expense);
   }
-  expenseEntries = newArr;
-  displayExpenses(expenseEntries);
 }
